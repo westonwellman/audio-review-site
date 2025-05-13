@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  repo: <westonwellman>/<audio-review-site>
   branch: main
 
 media_folder: "static/uploads"
