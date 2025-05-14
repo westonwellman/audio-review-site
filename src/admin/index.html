@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Audio Review Site</title>
-    <!-- Correctly load the Netlify CMS JS file -->
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
-  </head>
-  <body>
-    <!-- Initialize the CMS after the window has loaded -->
+</head>
+<body>
+    <!-- CMS will initialize here -->
+    <div id="cms-container"></div> <!-- This is the target container -->
+    
     <script>
       window.onload = function() {
         CMS.init();
       };
     </script>
-  </body>
+</body>
 </html>
