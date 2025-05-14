@@ -1,7 +1,7 @@
 // Replace this with the path to your GitHub repository
 const REPO_OWNER = 'westonwellman'; // Replace with your GitHub username
 const REPO_NAME = 'audio-review-site'; // Replace with your repository name
-const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/src/content/posts`;
+const API_URL = `https://github.com/westonwellman/audio-review-site/tree/main/src/content/posts`;
 
 // Get posts from GitHub and display them
 async function fetchPosts() {
