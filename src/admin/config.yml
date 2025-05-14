@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: westonwellman/audio-review-site  # Replace with your repo name
+  repo: westonwellman/audio-review-site
   branch: main
 
 media_folder: "static/uploads"
