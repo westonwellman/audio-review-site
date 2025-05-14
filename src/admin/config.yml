@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   repo: westonwellman/audio-review-site
-  branch: src/content/posts
+  branch: main
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
@@ -9,7 +9,7 @@ public_folder: "/uploads"
 collections:
   - name: "posts"
     label: "Posts"
-    folder: "content/posts"
+    folder: "src/content/posts"
     create: true
     slug: "{{slug}}"
     fields:
