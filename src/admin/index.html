@@ -6,5 +6,11 @@
     <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
   </head>
   <body>
+    <script>
+      // Initialize the CMS only after the page has fully loaded.
+      window.onload = function() {
+        CMS.init();
+      };
+    </script>
   </body>
 </html>
