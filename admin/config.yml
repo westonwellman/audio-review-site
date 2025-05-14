@@ -1,5 +1,5 @@
 backend:
-  name: git-gateway
+  name: github
   repo: <westonwellman>/<audio-review-site>
   branch: main
 
