@@ -9,12 +9,13 @@ body {
   
   header {
     background-color: #1f1f1f;
-    padding: 20px;
+    padding: 7px;
     text-align: center;
   }
   
   header h1 {
     margin: 0;
+    margin-top: 12px;
   }
   
   nav a {
@@ -52,7 +53,7 @@ body {
   }
   
   #filter {
-    margin-top: 20px;
+    margin-top: 0px;
   }
   
   footer {
@@ -67,3 +68,18 @@ body {
     }
   }
   
+  /* Styling for Category and Tags */
+.post-meta {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+.post-meta span {
+  font-weight: bold;
+}
+
+.post-category, .post-tags {
+  display: block;
+  margin-bottom: 5px;
+}

@@ -21,7 +21,7 @@ async function fetchPosts() {
       const htmlContent = marked(postData);
 
       return {
-        title: post.name.replace('.md', ''),
+        title: post.name.replace('.md', '').replace(/-/g, ' '),
         body: htmlContent
       };
     });
@@ -50,3 +50,31 @@ function displayPosts(posts) {
 
 // Load posts when the page loads
 fetchPosts();
+
+
+
+
+function displayPosts(posts) {
+  const contentSection = document.getElementById('content');
+  contentSection.innerHTML = ''; // Clear previous posts
+
+  posts.forEach(post => {
+    const article = document.createElement('article');
+
+    // You can extract category and tags from your front matter here (assuming you have them in your markdown)
+    const category = post.category || 'Uncategorized';
+    const tags = post.tags || [];
+
+    const tagsHtml = tags.map(tag => `<span class="post-tag">${tag}</span>`).join(', ');
+
+    article.innerHTML = `
+      <h2>${post.title}</h2>
+      <div class="post-meta">
+        <span class="post-category">Category: ${category}</span>
+        <span class="post-tags">Tags: ${tagsHtml}</span>
+      </div>
+      <div>${post.body}</div>
+    `;
+    contentSection.appendChild(article);
+  });
+}
