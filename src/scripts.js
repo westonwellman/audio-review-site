@@ -1,46 +1,52 @@
-// Sample articles
-const posts = [
-    {
-      title: "Moog Matriarch Review",
-      category: "Synths",
-      tags: ["analog", "semi-modular", "Moog"],
-      body: "The Moog Matriarch is a semi-modular analog synthesizer...",
-    },
-    {
-      title: "Ableton Live Review",
-      category: "Software",
-      tags: ["DAW", "Ableton"],
-      body: "Ableton Live is one of the most popular DAWs for musicians...",
-    },
-    // Add more posts here...
-  ];
-  
-  // Filter Posts by Category
-  const filterSelect = document.getElementById('category');
-  const contentSection = document.getElementById('content');
-  
-  filterSelect.addEventListener('change', function () {
-    const selectedCategory = filterSelect.value;
-    const filteredPosts = posts.filter(post => 
-      selectedCategory === 'all' || post.category === selectedCategory
-    );
-    displayPosts(filteredPosts);
-  });
-  
-  // Display Posts
-  function displayPosts(posts) {
-    contentSection.innerHTML = ''; // Clear previous posts
-    posts.forEach(post => {
-      const article = document.createElement('article');
-      article.innerHTML = `
-        <h2>${post.title}</h2>
-        <p><strong>Category:</strong> ${post.category}</p>
-        <p>${post.body.substring(0, 150)}...</p>
-      `;
-      contentSection.appendChild(article);
+// Replace this with the path to your GitHub repository
+const REPO_OWNER = 'westonwellman'; // Replace with your GitHub username
+const REPO_NAME = 'audio-review-site'; // Replace with your repository name
+const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/src/content/posts`;
+
+// Get posts from GitHub and display them
+async function fetchPosts() {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    
+    // Filter out only markdown files
+    const posts = data.filter(file => file.name.endsWith('.md'));
+    
+    // Fetch each post's content
+    const postPromises = posts.map(async (post) => {
+      const postResponse = await fetch(post.download_url);
+      const postData = await postResponse.text();
+      
+      // Convert Markdown to HTML
+      const htmlContent = marked(postData);
+
+      return {
+        title: post.name.replace('.md', ''),
+        body: htmlContent
+      };
     });
+
+    const postDetails = await Promise.all(postPromises);
+    displayPosts(postDetails);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
   }
-  
-  // Initial Load
-  displayPosts(posts);
-  
+}
+
+// Display posts in the content section
+function displayPosts(posts) {
+  const contentSection = document.getElementById('content');
+  contentSection.innerHTML = ''; // Clear previous posts
+
+  posts.forEach(post => {
+    const article = document.createElement('article');
+    article.innerHTML = `
+      <h2>${post.title}</h2>
+      <div>${post.body}</div>
+    `;
+    contentSection.appendChild(article);
+  });
+}
+
+// Load posts when the page loads
+fetchPosts();
